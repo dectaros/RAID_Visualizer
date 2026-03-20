@@ -1172,6 +1172,8 @@ async function animateDriveWipe(driveIndices, duration = 520) {
   unique.forEach((driveIndex) => {
     const drive = driveEls[driveIndex];
     if (!drive) return;
+    if (duration > 700) drive.dataset.wipe = 'slow';
+    else delete drive.dataset.wipe;
     drive.classList.add('wiping');
   });
   await new Promise((resolve) => setTimeout(resolve, duration));
@@ -1179,6 +1181,7 @@ async function animateDriveWipe(driveIndices, duration = 520) {
     clearDriveSlots(driveIndex);
     const drive = driveEls[driveIndex];
     if (!drive) return;
+    delete drive.dataset.wipe;
     drive.classList.remove('wiping');
   });
 }
@@ -1694,7 +1697,7 @@ async function startDiskRebuild() {
 
   if (wipeTargets.length) {
     statusText.textContent = `${RAID_CONFIG.name}: preparing overwrite targets ${wipeTargets.map(i => String.fromCharCode(65 + i)).join(', ')} before rebuild.`;
-    await animateDriveWipe(wipeTargets);
+    await animateDriveWipe(wipeTargets, RAID_CONFIG.type === 'stripe-mirror' ? 980 : 520);
     statusText.textContent = RAID_CONFIG.type === 'stripe-mirror'
       ? `${RAID_CONFIG.name}: rebuilding failed stripe set ${rebuildTargetDrives.map(i => String.fromCharCode(65 + i)).join(', ')} from the surviving mirror set.`
       : `${RAID_CONFIG.name}: rebuilding replaced drive ${failedDrives.map(i => String.fromCharCode(65 + i)).join(', ')} sector by sector.`;

@@ -212,6 +212,9 @@ body.raid-page {
   animation: drive-wipe 520ms ease forwards;
   z-index: 5;
 }
+.drive[data-wipe="slow"]::after {
+  animation-duration: 980ms;
+}
 .drive-title {
   position: absolute; top: 10px; left: 0; width: 100%; text-align: center;
   font-weight: 700; letter-spacing: .03em; font-size: 16px; z-index: 3;
@@ -807,6 +810,22 @@ body.start-page {
 .cpu-box.cpu-high .cpu-value { color: #ff3b30 !important; }
 
 @media (max-width: 1400px) {
+  .topbar {
+    gap: 10px;
+    padding: 8px 12px;
+    max-width: 54vw;
+    flex-wrap: wrap;
+  }
+
+  .topbar .title {
+    font-size: 16px;
+  }
+
+  .topbar .subtitle,
+  .recover-btn {
+    font-size: 12px;
+  }
+
   .source-wrap {
     width: 24vw;
   }
@@ -821,8 +840,106 @@ body.start-page {
     width: 24vw;
   }
 
+  .status {
+    top: 76vh;
+    width: 24vw;
+    font-size: 12px;
+  }
+
+  .algorithm-box,
+  .formula {
+    left: 37vw;
+    width: 20vw;
+    min-width: 240px;
+  }
+
+  .formula {
+    top: calc(75vh + 12vh + 1.6vh);
+    font-size: .92rem;
+  }
+
   .drives-wrap {
     width: 66vw;
+  }
+}
+
+@media (max-width: 1250px) {
+  .topbar {
+    max-width: 58vw;
+  }
+
+  .source-wrap {
+    left: 3vw;
+    width: 22vw;
+  }
+
+  .legend {
+    left: 3vw;
+    top: calc(18vh + 22vw + 1.5vh);
+    width: 22vw;
+    gap: 10px;
+    font-size: 11px;
+  }
+
+  .packet-legend {
+    left: 3vw;
+    top: calc(18vh + 22vw + 1.5vh);
+    width: 22vw;
+    padding: 8px 10px;
+  }
+
+  .packet-legend-item,
+  .packet-legend-footer {
+    font-size: .72rem;
+  }
+
+  .status {
+    left: 3vw;
+    top: 77vh;
+    width: 22vw;
+    font-size: 11px;
+  }
+
+  .drives-wrap {
+    right: 2vw;
+    width: 72vw;
+    gap: 0.6vw;
+  }
+
+  .drive-title {
+    font-size: 13px;
+  }
+
+  .algorithm-box,
+  .formula {
+    left: 34vw;
+    width: 24vw;
+    min-width: 220px;
+  }
+
+  .algorithm-box {
+    top: 76vh;
+    height: 11vh;
+    min-height: 90px;
+    padding: 8px 12px;
+  }
+
+  .formula {
+    top: calc(76vh + 11vh + 1.6vh);
+    font-size: .88rem;
+  }
+
+  .algorithm-title {
+    font-size: .96rem;
+  }
+
+  .algorithm-formula {
+    font-size: .78rem;
+  }
+
+  .caption {
+    font-size: 1rem;
+    line-height: 1.15;
   }
 }
 
@@ -854,5 +971,32 @@ body.start-page {
 
   .drive-title {
     font-size: 13px;
+  }
+
+  .topbar {
+    max-width: 62vw;
+  }
+
+  .algorithm-box,
+  .formula {
+    left: 33vw;
+    width: 25vw;
+    min-width: 200px;
+  }
+
+  .algorithm-box {
+    top: 77vh;
+    height: 10vh;
+    min-height: 84px;
+  }
+
+  .formula {
+    top: calc(77vh + 10vh + 1.5vh);
+    font-size: .82rem;
+  }
+
+  .status {
+    top: 78vh;
+    width: 23vw;
   }
 }
