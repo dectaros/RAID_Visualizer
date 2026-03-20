@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAID 10</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body class="raid-page">
+  <div class="stage" id="stage">
+    <div class="topbar">
+      <div class="title">RAID 10</div>
+      <div class="subtitle">Space = next step | R = restart</div>
+    </div>
+
+    <div class="legend">
+      <span style="color: var(--blue)"><i class="swatch"></i>Data</span>
+      <span style="color: var(--purple)"><i class="swatch"></i>Mirror</span>
+      <span style="color: var(--orange)"><i class="swatch"></i>Parity</span>
+      <span style="color: var(--teal)"><i class="swatch"></i>Second parity / spare</span>
+      <span style="color: var(--red)"><i class="swatch"></i>Failed drive</span>
+    </div>
+
+    <div class="source-wrap">
+      <div class="source-frame" id="sourceFrame">
+        <div class="source-img"></div>
+        <div class="grid" id="sourceGrid"></div>
+        <div class="data-lost" id="dataLost">DATA LOST</div>
+        <div class="cross" id="sourceCross"></div>
+      </div>
+      <div class="restore-frame" id="restoreFrame"></div>
+    </div>
+
+    <div class="status" id="statusText">Press Space to advance the animation.</div>
+    <div class="drives-wrap" id="drivesWrap"></div>
+    <div class="caption" id="caption"></div>
+  </div>
+
+  <script>
+    const RAID_CONFIG = {"name": "RAID 10", "type": "mirror-stripe", "drives": 4, "desc": "RAID 10 mirrors pairs of drives, then stripes data across the mirrored pairs.", "result": "RAID 10 combines performance and redundancy. It can survive one drive failure in each mirror pair.", "fail": [1], "tolerate": true, "cpu_load": "6%"};
+  </script>
+  <script src="common.js"></script>
+</body>
+</html>

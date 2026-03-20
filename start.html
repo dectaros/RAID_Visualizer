@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAID Visualizer</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body class="start-page">
+  <div class="start-layout">
+    <aside class="sidebar">
+      <h1>RAID Visualizer</h1>
+      <p>Each RAID level is a separate file. The viewer starts with RAID 0 by default.</p>
+      <div class="nav" id="nav">
+        <button data-page="raid0.html" class="active">RAID 0</button>
+        <button data-page="raid1.html">RAID 1</button>
+        <button data-page="raid01.html">RAID 0+1</button>
+        <button data-page="raid10.html">RAID 10</button>
+        <button data-page="raid5.html">RAID 5</button>
+        <button data-page="raid50.html">RAID 50</button>
+        <button data-page="raid6.html">RAID 6</button>
+        <button data-page="raid60.html">RAID 60</button>
+        <button data-page="adapt.html">ADAPT</button>
+      </div>
+    </aside>
+    <main class="viewer">
+      <iframe id="viewer" src="raid0.html" title="RAID viewer" tabindex="-1"></iframe>
+    </main>
+  </div>
+
+  <script>
+    const viewer = document.getElementById('viewer');
+    const buttons = [...document.querySelectorAll('#nav button')];
+
+    function postToViewer(type) {
+      if (viewer.contentWindow) {
+        viewer.contentWindow.postMessage({ type }, '*');
+      }
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        viewer.src = btn.dataset.page;
+        viewer.focus();
+      });
+    });
+
+    viewer.addEventListener('load', () => {
+      viewer.focus();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const tagName = document.activeElement?.tagName;
+      if (tagName === 'INPUT' || tagName === 'TEXTAREA') return;
+
+      if (event.code === 'Space') {
+        event.preventDefault();
+        postToViewer('raid-next-step');
+      }
+
+      if (event.key === 'r' || event.key === 'R') {
+        event.preventDefault();
+        postToViewer('raid-reset');
+      }
+    });
+  </script>
+</body>
+</html>
